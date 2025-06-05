@@ -18,10 +18,10 @@ const { rateLimiter } = require('./middleware/rateLimiter');
 const app = express();
 
 //We are temporary allowing the user admin role to be abe to upload the files
-app.use((req, res, next) => {
-  req.user = { role: 'admin' };
-  next();
-});
+// app.use((req, res, next) => {
+//   req.user = { role: 'admin' };
+//   next();
+// });
 
 // Global Middlewares
 app.use(helmet());
