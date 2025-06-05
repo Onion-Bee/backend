@@ -1,0 +1,651 @@
+{
+	"info": {
+		"_postman_id": "6073d352-6704-4a9a-afea-c5de717bc039",
+		"name": "mathongo-backend",
+		"description": "This collection exercises the Chapter Dashboard backend. It contains three routes:\n\n1. GET /chapters (list + filters + pagination)\n    \n2. GET /chapters/:id (retrieve a single chapter)\n    \n3. POST /chapters (bulk upload chapters JSON).\n    \n\nUse the `{{baseUrl}}` environment variable to switch between local and deployed URLs.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45617843",
+		"_collection_link": "https://shouryadeepbera.postman.co/workspace/Shourya-Deep-Bera's-Workspace~9872af88-aca3-4d48-8e0c-4e0b82fb8fb1/collection/45617843-6073d352-6704-4a9a-afea-c5de717bc039?action=share&source=collection_link&creator=45617843"
+	},
+	"item": [
+		{
+			"name": "GET All Chapters (with filters & pagination)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/chapters?class=&unit=&status=&isWeakChapter=&subject=&page=&limit=",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"chapters"
+					],
+					"query": [
+						{
+							"key": "class",
+							"value": ""
+						},
+						{
+							"key": "unit",
+							"value": ""
+						},
+						{
+							"key": "status",
+							"value": ""
+						},
+						{
+							"key": "isWeakChapter",
+							"value": ""
+						},
+						{
+							"key": "subject",
+							"value": ""
+						},
+						{
+							"key": "page",
+							"value": ""
+						},
+						{
+							"key": "limit",
+							"value": ""
+						}
+					]
+				},
+				"description": "**GET ALL CHAPTERS**  \n  \nReturns a paginated list of chapters. You may optionally filter by one or more of: `class`, `unit`, `status`, `isWeakChapter`, or `subject`.\n\n- **Query Parameters**:  \n      \n    • `class` (string) — e.g. “Class 11”  \n      \n    • `unit` (string) — e.g. “Mechanics 1”  \n      \n    • `status` (string) — “Not Started” / “In Progress” / “Completed”  \n      \n    • `isWeakChapter` (boolean) — `true` or `false`  \n      \n    • `subject` (string) — e.g. “Mathematics”  \n      \n    • `page` (integer) — page number (default = 1)  \n      \n    • `limit` (integer) — items per page (default = 10)\n    \n\n- **Response JSON Schema**\n    \n\n``` json\n{\n  \"success\": true,\n  \"count\": <number of items in this page>,\n  \"total\": <total chapters matching filters>,\n  \"page\": <current page>,\n  \"pages\": <total pages>,\n  \"data\": [\n    {\n      \"_id\": \"64f9a513b2e6f1e1a1c2e3d9\",\n      \"subject\": \"Mathematics\",\n      \"chapter\": \"Linear Equations\",\n      \"class\": \"Class 10\",\n      \"unit\": \"Unit 2\",\n      \"yearWiseQuestionCount\": { \"2019\": 12, \"2020\": 15, … },\n      \"questionSolved\": 0,\n      \"status\": \"In Progress\",\n      \"isWeakChapter\": false,\n      \"createdAt\": \"2025-06-05T10:00:00.000Z\",\n      \"updatedAt\": \"2025-06-05T10:00:00.000Z\",\n      \"__v\": 0\n    },\n    … more chapter objects …\n  ]\n}\n\n ```\n\n**Example**:  \n  \nTo get page 2 of Class 11 Physics chapters that are in progress, set params:\n\n```\n  class = Class 11  \n  subject = Physics  \n  status = In Progress  \n  page = 2  \n  limit = 5\n\n ```"
+			},
+			"response": [
+				{
+					"name": "Example 200",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/api/v1/chapters?class=&unit=&status=&isWeakChapter=&subject=&page=&limit=",
+							"path": [
+								"api",
+								"v1",
+								"chapters"
+							],
+							"query": [
+								{
+									"key": "class",
+									"value": ""
+								},
+								{
+									"key": "unit",
+									"value": ""
+								},
+								{
+									"key": "status",
+									"value": ""
+								},
+								{
+									"key": "isWeakChapter",
+									"value": ""
+								},
+								{
+									"key": "subject",
+									"value": ""
+								},
+								{
+									"key": "page",
+									"value": ""
+								},
+								{
+									"key": "limit",
+									"value": ""
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "Cross-Origin-Embedder-Policy",
+							"value": "require-corp"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Resource-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Origin-Agent-Cluster",
+							"value": "?1"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "RateLimit-Policy",
+							"value": "30;w=60"
+						},
+						{
+							"key": "RateLimit-Limit",
+							"value": "30"
+						},
+						{
+							"key": "RateLimit-Remaining",
+							"value": "29"
+						},
+						{
+							"key": "RateLimit-Reset",
+							"value": "60"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "16486"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"4066-DZkLQS8TSyfuKICWrIw895xCjDQ\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 05 Jun 2025 04:28:21 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"count\": 44,\n    \"total\": 44,\n    \"page\": null,\n    \"pages\": null,\n    \"data\": [\n        {\n            \"_id\": \"684094f3ba13c80b792cd3d7\",\n            \"subject\": \"Physics\",\n            \"chapter\": \"Kinetic Theory of Gases\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Thermodynamics\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 4,\n                \"2020\": 7,\n                \"2021\": 3,\n                \"2022\": 8,\n                \"2023\": 2,\n                \"2024\": 5,\n                \"2025\": 3\n            },\n            \"questionSolved\": 0,\n            \"status\": \"Not Started\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.121Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.121Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3da\",\n            \"subject\": \"Physics\",\n            \"chapter\": \"Electrostatics\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Electromagnetism\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 0,\n                \"2020\": 1,\n                \"2021\": 3,\n                \"2022\": 1,\n                \"2023\": 3,\n                \"2024\": 3,\n                \"2025\": 7\n            },\n            \"questionSolved\": 0,\n            \"status\": \"Not Started\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.121Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.121Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3e2\",\n            \"subject\": \"Physics\",\n            \"chapter\": \"Ray Optics\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Optics\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 3,\n                \"2020\": 6,\n                \"2021\": 10,\n                \"2022\": 4,\n                \"2023\": 10,\n                \"2024\": 6,\n                \"2025\": 10\n            },\n            \"questionSolved\": 30,\n            \"status\": \"In Progress\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.121Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.121Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3f6\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"General Organic Chemistry\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Organic Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 9,\n                \"2020\": 0,\n                \"2021\": 0,\n                \"2022\": 7,\n                \"2023\": 6,\n                \"2024\": 5,\n                \"2025\": 6\n            },\n            \"questionSolved\": 33,\n            \"status\": \"Completed\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.122Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.122Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd417\",\n            \"subject\": \"Mathematics\",\n            \"chapter\": \"Parabola\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Coordinate Geometry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 7,\n                \"2020\": 3,\n                \"2021\": 3,\n                \"2022\": 1,\n                \"2023\": 6,\n                \"2024\": 0,\n                \"2025\": 6\n            },\n            \"questionSolved\": 26,\n            \"status\": \"Completed\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.123Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.123Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3ea\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"Some Basic Concepts of Chemistry\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Physical Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 8,\n                \"2020\": 2,\n                \"2021\": 8,\n                \"2022\": 2,\n                \"2023\": 7,\n                \"2024\": 8,\n                \"2025\": 4\n            },\n            \"questionSolved\": 28,\n            \"status\": \"In Progress\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.121Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.121Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd425\",\n            \"subject\": \"Mathematics\",\n            \"chapter\": \"Differentiation\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Calculus\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 0,\n                \"2020\": 8,\n                \"2021\": 8,\n                \"2022\": 9,\n                \"2023\": 5,\n                \"2024\": 5,\n                \"2025\": 7\n            },\n            \"questionSolved\": 0,\n            \"status\": \"Not Started\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.124Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.124Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd40e\",\n            \"subject\": \"Mathematics\",\n            \"chapter\": \"Permutation Combination\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Algebra\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 5,\n                \"2020\": 5,\n                \"2021\": 1,\n                \"2022\": 6,\n                \"2023\": 8,\n                \"2024\": 7,\n                \"2025\": 3\n            },\n            \"questionSolved\": 4,\n            \"status\": \"In Progress\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.123Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.123Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd410\",\n            \"subject\": \"Mathematics\",\n            \"chapter\": \"Mathematical Induction\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Algebra\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 7,\n                \"2020\": 9,\n                \"2021\": 10,\n                \"2022\": 7,\n                \"2023\": 6,\n                \"2024\": 4,\n                \"2025\": 9\n            },\n            \"questionSolved\": 31,\n            \"status\": \"In Progress\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.123Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.123Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd400\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"d and f Block Elements\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Inorganic Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 4,\n                \"2020\": 4,\n                \"2021\": 7,\n                \"2022\": 0,\n                \"2023\": 9,\n                \"2024\": 10,\n                \"2025\": 8\n            },\n            \"questionSolved\": 33,\n            \"status\": \"In Progress\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.122Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.122Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd402\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"Haloalkanes and Haloarenes\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Organic Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 9,\n                \"2020\": 4,\n                \"2021\": 10,\n                \"2022\": 6,\n                \"2023\": 8,\n                \"2024\": 1,\n                \"2025\": 3\n            },\n            \"questionSolved\": 0,\n            \"status\": \"Not Started\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.122Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.122Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd40a\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"Practical Chemistry\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Inorganic Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 6,\n                \"2020\": 4,\n                \"2021\": 9,\n                \"2022\": 5,\n                \"2023\": 3,\n                \"2024\": 1,\n                \"2025\": 3\n            },\n            \"questionSolved\": 20,\n            \"status\": \"In Progress\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.122Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.122Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd41c\",\n            \"subject\": \"Mathematics\",\n            \"chapter\": \"Statistics\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Algebra\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 3,\n                \"2020\": 0,\n                \"2021\": 4,\n                \"2022\": 3,\n                \"2023\": 9,\n                \"2024\": 7,\n                \"2025\": 9\n            },\n            \"questionSolved\": 0,\n            \"status\": \"Not Started\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.123Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.123Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd424\",\n            \"subject\": \"Mathematics\",\n            \"chapter\": \"Continuity and Differentiability\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Calculus\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 3,\n                \"2020\": 2,\n                \"2021\": 6,\n                \"2022\": 5,\n                \"2023\": 6,\n                \"2024\": 4,\n                \"2025\": 6\n            },\n            \"questionSolved\": 32,\n            \"status\": \"Completed\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.124Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.124Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3d4\",\n            \"subject\": \"Physics\",\n            \"chapter\": \"Mechanical Properties of Fluids\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Mechanics 2\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 2,\n                \"2020\": 0,\n                \"2021\": 1,\n                \"2022\": 0,\n                \"2023\": 0,\n                \"2024\": 7,\n                \"2025\": 8\n            },\n            \"questionSolved\": 0,\n            \"status\": \"Not Started\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.121Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.121Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3f2\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"Redox Reactions\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Physical Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 1,\n                \"2020\": 2,\n                \"2021\": 1,\n                \"2022\": 6,\n                \"2023\": 4,\n                \"2024\": 2,\n                \"2025\": 7\n            },\n            \"questionSolved\": 11,\n            \"status\": \"In Progress\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.121Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.121Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3d2\",\n            \"subject\": \"Physics\",\n            \"chapter\": \"Gravitation\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Mechanics 1\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 3,\n                \"2020\": 4,\n                \"2021\": 5,\n                \"2022\": 9,\n                \"2023\": 0,\n                \"2024\": 6,\n                \"2025\": 8\n            },\n            \"questionSolved\": 35,\n            \"status\": \"Completed\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.121Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.121Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3f3\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"Hydrogen\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Inorganic Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 8,\n                \"2020\": 6,\n                \"2021\": 1,\n                \"2022\": 7,\n                \"2023\": 10,\n                \"2024\": 4,\n                \"2025\": 0\n            },\n            \"questionSolved\": 36,\n            \"status\": \"Completed\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.122Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.122Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd405\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"Carboxylic Acid Derivatives\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Organic Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 3,\n                \"2020\": 6,\n                \"2021\": 0,\n                \"2022\": 6,\n                \"2023\": 3,\n                \"2024\": 4,\n                \"2025\": 8\n            },\n            \"questionSolved\": 30,\n            \"status\": \"Completed\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.122Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.122Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd411\",\n            \"subject\": \"Mathematics\",\n            \"chapter\": \"Binomial Theorem\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Algebra\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 1,\n                \"2020\": 3,\n                \"2021\": 4,\n                \"2022\": 1,\n                \"2023\": 2,\n                \"2024\": 8,\n                \"2025\": 9\n            },\n            \"questionSolved\": 28,\n            \"status\": \"Completed\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.123Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.123Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd41d\",\n            \"subject\": \"Mathematics\",\n            \"chapter\": \"Heights and Distances\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Trigonometry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 7,\n                \"2020\": 9,\n                \"2021\": 8,\n                \"2022\": 6,\n                \"2023\": 1,\n                \"2024\": 9,\n                \"2025\": 2\n            },\n            \"questionSolved\": 42,\n            \"status\": \"Completed\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.124Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.124Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3f7\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"Hydrocarbons\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Organic Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 8,\n                \"2020\": 5,\n                \"2021\": 0,\n                \"2022\": 6,\n                \"2023\": 6,\n                \"2024\": 4,\n                \"2025\": 9\n            },\n            \"questionSolved\": 0,\n            \"status\": \"Not Started\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.122Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.122Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3fd\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"Surface Chemistry\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Physical Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 2,\n                \"2020\": 2,\n                \"2021\": 8,\n                \"2022\": 8,\n                \"2023\": 9,\n                \"2024\": 1,\n                \"2025\": 10\n            },\n            \"questionSolved\": 0,\n            \"status\": \"Not Started\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.122Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.122Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd408\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"Polymers\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Organic Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 3,\n                \"2020\": 6,\n                \"2021\": 9,\n                \"2022\": 8,\n                \"2023\": 1,\n                \"2024\": 4,\n                \"2025\": 6\n            },\n            \"questionSolved\": 35,\n            \"status\": \"In Progress\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.122Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.122Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3dc\",\n            \"subject\": \"Physics\",\n            \"chapter\": \"Current Electricity\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Electromagnetism\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 0,\n                \"2020\": 10,\n                \"2021\": 0,\n                \"2022\": 4,\n                \"2023\": 6,\n                \"2024\": 8,\n                \"2025\": 10\n            },\n            \"questionSolved\": 38,\n            \"status\": \"Completed\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.121Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.121Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd409\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"Chemistry in Everyday Life\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Organic Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 4,\n                \"2020\": 7,\n                \"2021\": 6,\n                \"2022\": 1,\n                \"2023\": 2,\n                \"2024\": 2,\n                \"2025\": 6\n            },\n            \"questionSolved\": 28,\n            \"status\": \"Completed\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.122Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.122Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd427\",\n            \"subject\": \"Mathematics\",\n            \"chapter\": \"Indefinite Integration\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Calculus\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 10,\n                \"2020\": 5,\n                \"2021\": 3,\n                \"2022\": 4,\n                \"2023\": 9,\n                \"2024\": 9,\n                \"2025\": 9\n            },\n            \"questionSolved\": 19,\n            \"status\": \"In Progress\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.124Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.124Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3e1\",\n            \"subject\": \"Physics\",\n            \"chapter\": \"Electromagnetic Waves\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Miscellaneous\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 10,\n                \"2020\": 6,\n                \"2021\": 0,\n                \"2022\": 2,\n                \"2023\": 5,\n                \"2024\": 9,\n                \"2025\": 9\n            },\n            \"questionSolved\": 28,\n            \"status\": \"In Progress\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.121Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.121Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3d3\",\n            \"subject\": \"Physics\",\n            \"chapter\": \"Mechanical Properties of Solids\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Mechanics 2\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 4,\n                \"2020\": 6,\n                \"2021\": 0,\n                \"2022\": 2,\n                \"2023\": 10,\n                \"2024\": 10,\n                \"2025\": 7\n            },\n            \"questionSolved\": 0,\n            \"status\": \"Not Started\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.121Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.121Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3ed\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"Chemical Bonding and Molecular Structure\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Inorganic Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 7,\n                \"2020\": 5,\n                \"2021\": 2,\n                \"2022\": 0,\n                \"2023\": 5,\n                \"2024\": 5,\n                \"2025\": 3\n            },\n            \"questionSolved\": 22,\n            \"status\": \"In Progress\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.121Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.121Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3fe\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"General Principles and Processes of Isolation of Metals\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Inorganic Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 8,\n                \"2020\": 0,\n                \"2021\": 3,\n                \"2022\": 0,\n                \"2023\": 2,\n                \"2024\": 0,\n                \"2025\": 3\n            },\n            \"questionSolved\": 0,\n            \"status\": \"Not Started\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.122Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.122Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd404\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"Aldehydes and Ketones\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Organic Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 8,\n                \"2020\": 3,\n                \"2021\": 9,\n                \"2022\": 0,\n                \"2023\": 6,\n                \"2024\": 1,\n                \"2025\": 3\n            },\n            \"questionSolved\": 21,\n            \"status\": \"In Progress\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.122Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.122Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd40c\",\n            \"subject\": \"Mathematics\",\n            \"chapter\": \"Quadratic Equation\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Algebra\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 1,\n                \"2020\": 6,\n                \"2021\": 1,\n                \"2022\": 1,\n                \"2023\": 9,\n                \"2024\": 1,\n                \"2025\": 1\n            },\n            \"questionSolved\": 0,\n            \"status\": \"Not Started\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.122Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.122Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3e9\",\n            \"subject\": \"Physics\",\n            \"chapter\": \"Experimental Physics\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Miscellaneous\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 6,\n                \"2020\": 7,\n                \"2021\": 4,\n                \"2022\": 10,\n                \"2023\": 5,\n                \"2024\": 8,\n                \"2025\": 0\n            },\n            \"questionSolved\": 0,\n            \"status\": \"Not Started\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.121Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.121Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3ef\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"Thermodynamics (C)\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Physical Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 8,\n                \"2020\": 9,\n                \"2021\": 2,\n                \"2022\": 0,\n                \"2023\": 2,\n                \"2024\": 0,\n                \"2025\": 7\n            },\n            \"questionSolved\": 28,\n            \"status\": \"Completed\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.121Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.121Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3ca\",\n            \"subject\": \"Physics\",\n            \"chapter\": \"Mathematics in Physics\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Mechanics 1\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 0,\n                \"2020\": 2,\n                \"2021\": 5,\n                \"2022\": 5,\n                \"2023\": 3,\n                \"2024\": 7,\n                \"2025\": 6\n            },\n            \"questionSolved\": 0,\n            \"status\": \"Not Started\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.120Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.120Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3e7\",\n            \"subject\": \"Physics\",\n            \"chapter\": \"Semiconductors\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Miscellaneous\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 9,\n                \"2020\": 10,\n                \"2021\": 9,\n                \"2022\": 8,\n                \"2023\": 6,\n                \"2024\": 2,\n                \"2025\": 7\n            },\n            \"questionSolved\": 0,\n            \"status\": \"Not Started\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.121Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.121Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3ff\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"p Block Elements (Group 15, 16, 17 & 18)\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Inorganic Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 3,\n                \"2020\": 3,\n                \"2021\": 8,\n                \"2022\": 0,\n                \"2023\": 4,\n                \"2024\": 4,\n                \"2025\": 9\n            },\n            \"questionSolved\": 0,\n            \"status\": \"Not Started\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.122Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.122Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd403\",\n            \"subject\": \"Chemistry\",\n            \"chapter\": \"Alcohols Phenols and Ethers\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Organic Chemistry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 1,\n                \"2020\": 0,\n                \"2021\": 2,\n                \"2022\": 2,\n                \"2023\": 5,\n                \"2024\": 5,\n                \"2025\": 5\n            },\n            \"questionSolved\": 20,\n            \"status\": \"Completed\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.122Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.122Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd41b\",\n            \"subject\": \"Mathematics\",\n            \"chapter\": \"Mathematical Reasoning\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Algebra\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 4,\n                \"2020\": 2,\n                \"2021\": 10,\n                \"2022\": 2,\n                \"2023\": 6,\n                \"2024\": 0,\n                \"2025\": 0\n            },\n            \"questionSolved\": 23,\n            \"status\": \"In Progress\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.123Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.123Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd42a\",\n            \"subject\": \"Mathematics\",\n            \"chapter\": \"Differential Equations\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Calculus\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 4,\n                \"2020\": 5,\n                \"2021\": 2,\n                \"2022\": 1,\n                \"2023\": 5,\n                \"2024\": 8,\n                \"2025\": 3\n            },\n            \"questionSolved\": 28,\n            \"status\": \"Completed\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.124Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.124Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd3e3\",\n            \"subject\": \"Physics\",\n            \"chapter\": \"Wave Optics\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Optics\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 3,\n                \"2020\": 10,\n                \"2021\": 10,\n                \"2022\": 9,\n                \"2023\": 8,\n                \"2024\": 5,\n                \"2025\": 4\n            },\n            \"questionSolved\": 6,\n            \"status\": \"In Progress\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.121Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.121Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd415\",\n            \"subject\": \"Mathematics\",\n            \"chapter\": \"Pair of Lines\",\n            \"class\": \"Class 11\",\n            \"unit\": \"Coordinate Geometry\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 2,\n                \"2020\": 3,\n                \"2021\": 1,\n                \"2022\": 1,\n                \"2023\": 3,\n                \"2024\": 10,\n                \"2025\": 6\n            },\n            \"questionSolved\": 26,\n            \"status\": \"Completed\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.123Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.123Z\"\n        },\n        {\n            \"_id\": \"684094f3ba13c80b792cd429\",\n            \"subject\": \"Mathematics\",\n            \"chapter\": \"Area Under Curves\",\n            \"class\": \"Class 12\",\n            \"unit\": \"Calculus\",\n            \"yearWiseQuestionCount\": {\n                \"2019\": 5,\n                \"2020\": 4,\n                \"2021\": 8,\n                \"2022\": 4,\n                \"2023\": 0,\n                \"2024\": 6,\n                \"2025\": 4\n            },\n            \"questionSolved\": 31,\n            \"status\": \"Completed\",\n            \"isWeakChapter\": false,\n            \"__v\": 0,\n            \"createdAt\": \"2025-06-04T18:48:19.124Z\",\n            \"updatedAt\": \"2025-06-04T18:48:19.124Z\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "GET Chapter by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/chapters/:id",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"chapters",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "684094f3ba13c80b792cd417"
+						}
+					]
+				},
+				"description": "**GET CHAPTER BY ID**\n\nRetrieves a single chapter document by its MongoDB `_id`.\n\n- **Path Parameter**:\n    \n    • `id` (string, required) — MongoDB ObjectID of the chapter.\n    \n\n- **Response JSON Schema**:\n    \n\n``` json\n{\n  \"success\": true,\n  \"data\": {\n    \"_id\": \"…\",\n    \"subject\": \"Mathematics\",\n    \"chapter\": \"Linear Equations\",\n    \"class\": \"Class 10\",\n    \"unit\": \"Unit 2\",\n    \"yearWiseQuestionCount\": { … },\n    \"questionSolved\": 0,\n    \"status\": \"In Progress\",\n    \"isWeakChapter\": false,\n    \"createdAt\": \"2025-06-05T10:00:00.000Z\",\n    \"updatedAt\": \"2025-06-05T10:00:00.000Z\",\n    \"__v\": 0\n  }\n}\n\n ```\n\n- **404 Response** (when not found):\n    \n\n``` json\n{\n  \"success\": false,\n  \"error\": \"Chapter not found\"\n}\n\n ```"
+			},
+			"response": [
+				{
+					"name": "Example 200 by ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "/api/v1/chapters/:id",
+							"path": [
+								"api",
+								"v1",
+								"chapters",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "684094f3ba13c80b792cd417"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "Cross-Origin-Embedder-Policy",
+							"value": "require-corp"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Resource-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Origin-Agent-Cluster",
+							"value": "?1"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "RateLimit-Policy",
+							"value": "30;w=60"
+						},
+						{
+							"key": "RateLimit-Limit",
+							"value": "30"
+						},
+						{
+							"key": "RateLimit-Remaining",
+							"value": "29"
+						},
+						{
+							"key": "RateLimit-Reset",
+							"value": "60"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "389"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"185-J8UuO9WFEPAEjQe5pGWQJ7/2j4o\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 05 Jun 2025 04:34:34 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": {\n        \"_id\": \"684094f3ba13c80b792cd417\",\n        \"subject\": \"Mathematics\",\n        \"chapter\": \"Parabola\",\n        \"class\": \"Class 11\",\n        \"unit\": \"Coordinate Geometry\",\n        \"yearWiseQuestionCount\": {\n            \"2019\": 7,\n            \"2020\": 3,\n            \"2021\": 3,\n            \"2022\": 1,\n            \"2023\": 6,\n            \"2024\": 0,\n            \"2025\": 6\n        },\n        \"questionSolved\": 26,\n        \"status\": \"Completed\",\n        \"isWeakChapter\": false,\n        \"__v\": 0,\n        \"createdAt\": \"2025-06-04T18:48:19.123Z\",\n        \"updatedAt\": \"2025-06-04T18:48:19.123Z\"\n    }\n}"
+				},
+				{
+					"name": "Example 404 by ID",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/chapters/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"chapters",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "684094f3ba13c80b79kkd417"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "Cross-Origin-Embedder-Policy",
+							"value": "require-corp"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Resource-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Origin-Agent-Cluster",
+							"value": "?1"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "RateLimit-Policy",
+							"value": "30;w=60"
+						},
+						{
+							"key": "RateLimit-Limit",
+							"value": "30"
+						},
+						{
+							"key": "RateLimit-Remaining",
+							"value": "29"
+						},
+						{
+							"key": "RateLimit-Reset",
+							"value": "60"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "45"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2d-SL97CUXq9NtRTNHtK8tBmmamHyA\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 05 Jun 2025 04:40:18 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": false,\n    \"error\": \"Chapter not found\"\n}"
+				}
+			]
+		},
+		{
+			"name": "POST Upload Chapters JSON",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/root/Desktop/mathongo/mock_data2.json"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/chapters",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"chapters"
+					]
+				},
+				"description": "**UPLOAD CHAPTERS (BULK)**\n\nAccepts a single `.json` file containing an array of chapter objects. Each object must match the Chapter schema:\n\n``` json\n{\n  \"subject\": \"Mathematics\",\n  \"chapter\": \"Linear Equations\",\n  \"class\": \"Class 10\",\n  \"unit\": \"Unit 2\",\n  \"yearWiseQuestionCount\": { \"2019\": 12, \"2020\": 15, … },\n  \"questionSolved\": 0,\n  \"status\": \"In Progress\",\n  \"isWeakChapter\": false\n}\n\n ```\n\n- **File Field**: `file` (must be of MIME type `application/json`).\n    \n- **Response**:\n    \n\n``` json\n{\n  \"success\": true,\n  \"insertedCount\": <# valid docs>,\n  \"failedCount\": <# invalid docs>,\n  \"errors\": [\n    { \"index\": 2, \"errors\": { … } },\n    …\n  ]\n}\n\n ```\n\n- **403 Response (if not “admin”):**\n    \n\n``` json\n{\n  \"success\": false,\n  \"error\": \"Unauthorized\"\n}\n\n\n ```"
+			},
+			"response": [
+				{
+					"name": "Example Upload Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/root/Desktop/mathongo/mock_data2.json"
+								}
+							]
+						},
+						"url": {
+							"raw": "/api/v1/chapters",
+							"path": [
+								"api",
+								"v1",
+								"chapters"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Security-Policy",
+							"value": "default-src 'self';base-uri 'self';font-src 'self' https: data:;form-action 'self';frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src 'self';script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests"
+						},
+						{
+							"key": "Cross-Origin-Embedder-Policy",
+							"value": "require-corp"
+						},
+						{
+							"key": "Cross-Origin-Opener-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Cross-Origin-Resource-Policy",
+							"value": "same-origin"
+						},
+						{
+							"key": "Origin-Agent-Cluster",
+							"value": "?1"
+						},
+						{
+							"key": "Referrer-Policy",
+							"value": "no-referrer"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=15552000; includeSubDomains"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-DNS-Prefetch-Control",
+							"value": "off"
+						},
+						{
+							"key": "X-Download-Options",
+							"value": "noopen"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-Permitted-Cross-Domain-Policies",
+							"value": "none"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "0"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "RateLimit-Policy",
+							"value": "30;w=60"
+						},
+						{
+							"key": "RateLimit-Limit",
+							"value": "30"
+						},
+						{
+							"key": "RateLimit-Remaining",
+							"value": "29"
+						},
+						{
+							"key": "RateLimit-Reset",
+							"value": "60"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "62"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"3e-xRMhImEYfDFpmu/tbE1+dvp1E1g\""
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 05 Jun 2025 04:48:53 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"insertedCount\": 2,\n    \"failedCount\": 0,\n    \"errors\": []\n}"
+				}
+			]
+		}
+	]
+}
