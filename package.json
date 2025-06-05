@@ -1,0 +1,28 @@
+{
+  "name": "chapter-dashboard-backend",
+  "version": "1.0.0",
+  "description": "RESTful API backend for Chapter Performance Dashboard",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.2",
+    "express-rate-limit": "^6.11.2",
+    "helmet": "^6.2.0",
+    "ioredis": "^5.6.1",
+    "mongoose": "^7.8.7",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "rate-limit-redis": "^2.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
